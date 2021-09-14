@@ -2,6 +2,7 @@ import { Controller, Get, Req, Query, Param, Post, Body } from '@nestjs/common';
 import { Request, query } from 'express';
 import { ProjectManageService } from './project-manage.service';
 import { CreateDto } from './dto/create.dto';
+import { Project } from './interfaces/project.interface';
 
 @Controller('project-manage')
 export class ProjectManageController {
@@ -14,8 +15,8 @@ export class ProjectManageController {
     }
 
     @Get()
-    getProjectManage(): string {
-        return this.projectManageService.getProjectManage();
+    getProjectManage(): Project[] {
+        return this.projectManageService.getProjects();
     }
 
     @Get('/list/:id')

@@ -1,8 +1,15 @@
 import { Injectable } from '@nestjs/common';
+import { Project } from './interfaces/project.interface';
 
 @Injectable()
 export class ProjectManageService {
-    getProjectManage(): string {
-        return 'this is a project';
+    private readonly projects: Project[] = [];
+
+    createProject(project: Project) {
+        this.projects.push(project);
+    }
+
+    getProjects(): Project[] {
+        return this.projects;
     }
 }
