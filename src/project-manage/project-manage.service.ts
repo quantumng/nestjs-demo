@@ -1,15 +1,23 @@
 import { Injectable } from '@nestjs/common';
 import { Project } from './interfaces/project.interface';
+import { InjectRepository } from '@nestjs/typeorm';
+import { Repository } from 'typeorm';
+import { ProjectManage } from './project-manage.entity';
 
 @Injectable()
 export class ProjectManageService {
     private readonly projects: Project[] = [];
 
+    constructor(
+        @InjectRepository(ProjectManage)
+        private projectManageRepository: Repository<ProjectManage>,
+    ) {}
+
     createProject(project: Project) {
-        this.projects.push(project);
+        return this.projectManageRepository.save(project);
     }
 
-    getProjects(): Project[] {
-        return this.projects;
+    getProjects(): Promise<ProjectManage[]> {
+        return this.projectManageRepository.find();
     }
 }

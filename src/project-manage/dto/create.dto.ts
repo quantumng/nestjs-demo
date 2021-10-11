@@ -1,4 +1,4 @@
 export class CreateDto {
     name: string;
-    age: number;
+    product: number;
 }
